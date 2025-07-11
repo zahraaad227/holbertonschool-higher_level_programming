@@ -1,19 +1,33 @@
-#!/usr/bin/env python3
-from task_01_pickle import CustomObject
+import pickle
 
-# Yeni obyekt yarat
-obj = CustomObject(name="John", age=25, is_student=True)
-print("Original Object:")
-obj.display()
+class CustomObject:
+    def __init__(self, name, age, is_student):
+        self.name = name
+        self.age = age
+        self.is_student = is_student
 
-# Serialize et və fayla yaz
-obj.serialize("object.pkl")
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+        print(f"Is Student: {self.is_student}")
 
-# Fayldan oxu və deserialize et
-new_obj = CustomObject.deserialize("object.pkl")
+    def serialize(self, filename):
+        try:
+            with open(filename, 'wb') as file:
+                pickle.dump(self, file)
+        except Exception as e:
+            print(f"Serialization failed: {e}")
 
-print("\nDeserialized Object:")
-if new_obj:
-    new_obj.display()
-else:
-    print("Deserialization failed.")
+    @classmethod
+    def deserialize(cls, filename):
+        try:
+            with open(filename, 'rb') as file:
+                obj = pickle.load(file)
+                if isinstance(obj, cls):
+                    return obj
+                else:
+                    print("Deserialized object is not of type CustomObject.")
+                    return None
+        except Exception as e:
+            print(f"Deserialization failed: {e}")
+            return None
