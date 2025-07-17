@@ -1,1 +1,2 @@
+#!/usr/bin
 SHOW DATABASES;
