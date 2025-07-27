@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""rite a class BaseGeometry (based on 5"""
+"""rite a class BaseGeometry based on 5"""
 class BaseGeometry:
-"""Public instance method: """
+"""Public instance method:"""
 
 
     def area(self):
