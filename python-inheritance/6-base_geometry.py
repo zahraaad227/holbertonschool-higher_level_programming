@@ -1,4 +1,4 @@
-#!/usr/bin/ython3
+#!/usr/bin/python3
 """rite a class BaseGeometry (based on 5"""
 class BaseGeometry:
 """Public instance method: """
