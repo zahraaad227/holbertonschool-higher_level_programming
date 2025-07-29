@@ -1,2 +1,3 @@
 --sql
-SELECT * FROM first_table
+-- List all rows from the table 'first_table'
+SELECT * FROM first_table;
