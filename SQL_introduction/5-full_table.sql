@@ -1,32 +1,32 @@
 --sql
 #!/bin/bash
 
-# Verilənlər bazası adı
+# Verilənlər bazasının adı parametrlə qəbul edilir
 DB_NAME="$1"
 
-# SQL faylını oxuyub MySQL serverinə göndəririk
-cat 5-full_table.sql | mysql -hlocalhost -uroot -proot $DB_NAME | \
+# SQL faylını oxuyub MySQL serverinə göndəririk və nəticəni manipulyasiya edirik
+cat 5-full_table.sql | mysql -hlocalhost -uroot -proot $DB_NAME 2>&1 | \
 grep -v 'Using a password' | \
-# Yeni sətirləri əvəz edin
+# Yeni sətirləri düzəldirik
 sed 's/\\n/\n/g' | \
-# Bütün boşluqları çıxarın
+# Bütün boşluqları çıxarırıq
 sed 's/ //g' | \
-# Tabulatorları çıxarın
+# Tabulatorları çıxarırıq
 sed 's/\t//g' | \
-# `first_table` ilə başlayan cədvəli tapın
+# Cədvəli tapırıq
 grep 'first_table' | \
-# AUTO_INCREMENT olan sətirləri tapın
+# AUTO_INCREMENT sətirini tapırıq
 grep 'AUTO_INCREMENT' | \
-# VARCHAR tipi olan sətirləri tapın
+# VARCHAR tipini tapırıq
 grep 'varchar' | \
-# CHAR(1) tipi olan sətirləri tapın
+# CHAR(1) tipini tapırıq
 grep 'char(1)' | \
-# created_at sütununu tapın
+# created_at sətirini tapırıq
 grep 'created_at' | \
-# PRIMARY KEY açarını tapın
+# PRIMARY KEY sətirini tapırıq
 grep 'PRIMARY' | \
-# ENGINE açarını tapın
+# ENGINE məlumatını tapırıq
 grep 'ENGINE' > table_desc
 
-# Nəticəni ekranda göstərin
+# Nəticəni ekrana göstəririk
 cat table_desc
