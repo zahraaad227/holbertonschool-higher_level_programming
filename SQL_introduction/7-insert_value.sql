@@ -1,3 +1,3 @@
--- Insert a new row into the 'first_table' with id = 89 and name = 'Best School'
+-- Insert a new row
 INSERT INTO first_table (id, name)
 VALUES (89, 'Best School'); 
